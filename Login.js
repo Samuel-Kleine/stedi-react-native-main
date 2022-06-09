@@ -6,12 +6,12 @@ const Login = () => {
   const [oneTimePassword, setOneTimePassword] = useState(null);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.mainView}>
       <TextInput
         style={styles.input}
         onChangeText={setPhoneNumber}
         value={phoneNumber}
-        placeholder ="867-5309"
+        placeholder ="801-867-5309"
       />
       <TextInput
         style={styles.input}
@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
       margin: 12,
       borderWidth: 1,
       padding: 10,
+    },
+    mainView: {
+      marginTop:100
     },
   });
   
