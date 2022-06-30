@@ -28,9 +28,10 @@ const getToken = async({phoneNumber, oneTimePassword, setUserLoggedIn}) =>{
   });
   
   const responseCode = tokenResponse.status;//200 code means successful login
-  if(responseCode === 200){
+  if(responseCode === 500){
     setUserLoggedIn(true);
   }
+  console.log("Response: ", responseCode);
   const tokenResponseString = await tokenResponse.text();
   console.log(tokenResponseString);
 }

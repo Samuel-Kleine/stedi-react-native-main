@@ -13,11 +13,11 @@ export default AppName
 
 const styles = StyleSheet.create({
   appName: {
-    paddingLeft:20,
+    paddingLeft:10,
   },
   text: {
     color: 'white',
     fontWeight: '600',
-    fontSize: 30
+    fontSize: 25
   }
 })
