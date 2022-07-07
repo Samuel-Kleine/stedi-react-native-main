@@ -8,7 +8,7 @@ import EmailAddress from './EmailAddress.js';
 const Home = () => {
   return (
     <View>
-      <Bar loggedInUser= 'youwhat@fakemail.com' />
+      <Bar/>
       <EmailAddress />
       <Icons />
     </View>
