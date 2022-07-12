@@ -16,37 +16,34 @@ const sendText = async (phoneNumber) => {
   console.log('Login Response',loginResponseText);//print the response
 };
 
-const getToken = async({phoneNumber, oneTimePassword, setUserLoggedIn}) =>{
+const getToken = async({phoneNumber, oneTimePassword, setUserLoggedIn, setUserName}) =>{
   console.log("Phone Number: ", phoneNumber);
   console.log("One Time Pass ", oneTimePassword);
   const tokenResponse = await fetch('https://dev.stedi.me/twofactorlogin',{
     method: 'POST',
     body:JSON.stringify({oneTimePassword, phoneNumber}),
     headers: {
-      'Content-type': 'application/json'
+      'Content-type': 'application/text'
     },
   });
   
   const responseCode = tokenResponse.status;//200 code means successful login
-  if(responseCode === 200){
+  console.log('Response Code,', responseCode);
+  if(responseCode == 200){
     setUserLoggedIn(true);
   }
-  console.log("Response: ", responseCode);
   const tokenResponseString = await tokenResponse.text();
-  console.log(tokenResponseString);
-  getEmail(tokenResponseString)
+  console.log('Token',tokenResponseString);
+  const emailResponse = await fetch('https://dev.stedi.me/validate/'+tokenResponseString)
+  const textEmail = await emailResponse.text();
+  setUserName(textEmail);
+  console.log('User Email', textEmail);
+  
 }
 
-const getEmail = async (tokenResponse)=> {
-  const emailResponse = await fetch('https://dev.stedi.me/validate/'+tokenResponse,{
-     method: 'GET',
-     headers: {
-         'Content-type': 'application/text'
-     }
- })
- const emailResponseText = await emailResponse.text();
- console.log('Email Response', emailResponseText);
- };
+
+ 
+ 
 
 
 const Login = (props) => {
@@ -80,7 +77,7 @@ const Login = (props) => {
       <TouchableOpacity
         style={styles.button}
         onPress={()=>{
-          getToken({phoneNumber, oneTimePassword, setUserLoggedIn:props.setUserLoggedIn});
+          getToken({phoneNumber, oneTimePassword, setUserLoggedIn:props.setUserLoggedIn, setUserName:props.setUserName});
         }}
       >
         <Text>Login</Text>

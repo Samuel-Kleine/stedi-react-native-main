@@ -1,11 +1,12 @@
 import React from "react";
+import {useState} from "react";
 import { StyleSheet, Text, View,} from 'react-native';
 
 
 function EmailAddress(props) {
     return (
         <View style={styles.emailAddress}>
-            {props.emailResponseText}
+           <Text>{props.userName}</Text> 
         </View>
     );
 }
